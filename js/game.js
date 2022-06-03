@@ -4,10 +4,22 @@ var board = [
     [0, 0, 0]
 ]
 
-const ME = 1
-const AI = -1
+const ME = -1
+const AI = +1
 
 function evalute() {
+    var score = 0
+
+    if (gameOver(state,AI)) {
+        score = +1
+    } else if (gameOver(state, ME)) {
+        score = -1
+    } else {
+        score = 0 
+    }
+
+    return score
+
 
 }
 
@@ -41,18 +53,81 @@ function gameOver(state, player) {
 }
 
 function gameOverAll() {
-
+    return gameOver(state, AI) || gameOver(state, ME)
 }
 
 function emptyCells() {
-
+    var cells = []
+    for (var x = 0; x <3; x++) {
+        for (var y = 0; y < 3; y++) {
+            if (state[x][y] == 0) {
+                cells.push([x, y])
+            }
+        }
+    }
+    return cells
 }
+
+fuction validMove(x, y) {
+    var empties = emptyCells(board)
+
+    try {
+        if (board[x][y] == 0) {
+            return true
+        } else{
+            return false
+        }
+    } catch (e) {
+        return false
+    }
+    }
+
 
 function setMove() {
-
+    if (validMove(x, y)) {
+        board[x][y] = player
+        return true
+    } else {
+        return false
+    }
 }
 
-function minmax() {
+
+function minmax(state, depth, player) {
+    var best
+
+    if (player == AI) {
+        best = [-1, -1, -1000]
+    } else {
+        best = [-1, -1, +1000]
+
+    }
+
+    if (depth == 0 || gameOverAll(state)) {
+        var score = evalute(state)
+        return [-1, -1, score]
+    }
+
+    emptyCells(state).forEach(function(cell) {
+        var x = cell[0]
+        var y = cell[1]
+        state[x][y] = player
+        var score = minmax(state, depth - 1, -player)
+        state[x][y] = 0
+        score[0] = x
+        score[1] = y
+
+        if (player == AI) {
+            if (score[2] > best[2]) {
+                best = score
+            }
+        } else {
+            if (score[2] > best[2]) {
+                    best = score
+        }
+
+        }
+    })
 
 }
 
