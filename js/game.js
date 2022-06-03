@@ -68,7 +68,7 @@ function emptyCells() {
     return cells
 }
 
-fuction validMove(x, y) {
+function validMove(x, y) {
     var empties = emptyCells(board)
 
     try {
@@ -132,13 +132,107 @@ function minmax(state, depth, player) {
 }
 
 function aiTurn() {
+    var x, y
+    var move
+    var cell
+
+    if (emptyCells(board).length == 9) {
+        x = parseInt(Math.random() * 3)
+        y = parseInt(Math.random() * 3)
+    } else {
+        move = minmax(board, emptyCells(board).length, AI)
+        x = move[0]
+        y = move[1]
+
+    }
+    if (setMove(x, y, AI)) {
+        cell = document.getElementById(String(x) + String(y))
+        cell.innerHTML = "0"
+    }
 
 }
+
 
 function clickedCell() {
+    var button = document.getElementById("btn-restart")
+    button.disalbed = true
+    var condition = gameOverAll(board) == false && emptyCells(board).length > 0
 
+    if (condition == true) {
+        var x = cell.id.split("")[0]
+        var y = cell.id.split("")[1]
+        var move = setmove(x, y, ME)
+        
+        if(move == true) {
+            cell.innerHTML = "x"
+            if (condition) {
+                aiTurn()
+            }
+        }
+    }
+
+    if (gameOver(board, AI)) {
+        var lines
+        var cell
+        var msg
+
+        if (board[0][0] == 1 && board[0][1] == 1 && board[0][2] == 1) {
+            lines = [[0, 0],[0, 1],[0, 2]]
+        } else if (board[1][0] == 1 && board[1][1] == 1 && board[1][2] == 1) {
+            lines = [[1, 0],[1, 1],[1, 2]]
+        } else if (board[2][0] == 1 && board[2][1] == 1 && board[2][2] == 1) {
+            lines = [[2, 0],[2, 1],[2, 2]]
+        } else if (board[0][0] == 1 && board[1][0] == 1 && board[2][0] == 1) {
+            lines = [[0, 0],[1, 0],[2, 0]]
+        } else if (board[0][1] == 1 && board[1][1] == 1 && board[2][1] == 1) {
+            lines = [[0, 1],[1, 1],[2, 1]]
+        } else if (board[0][2] == 1 && board[1][2] == 1 && board[2][2] == 1) {
+            lines = [[0, 2],[1, 2],[2, 2]]
+        } else if (board[0][0] == 1 && board[1][1] == 1 && board[2][2] == 1) {
+            lines = [[0, 0],[1, 1],[2, 2]]
+        } else if (board[0][0] == 1 && board[0][1] == 1 && board[0][2] == 1) {
+            lines = [[0, 2],[1, 1],[2, 0]]
+        }
+
+    }
+
+    for  (var i = 0; i < lines.length; i++) {
+        cell = document.getElementById(String(lines[i][0]) + String(line[i][1]))
+        cell.style.color = "red"
+
+    }
+
+    msg = document.getElementById("message")
+    msg.innerHTML = "You LOSE oh S**t!"
+
+    if (emptyCells(board).length == 0 && !gameOverAll(board)) {
+        msg = document.getElementById("message")
+        msg.innerHTML = "Draw"
+    
+    }
+    if (gameOverAll(board) == true || emptyCells(board).length == 0) {
+        button.value = "Restart!"
+        button.disabled = false
+    }
 }
 
-function restartBtn() {
+function restartBtn(button) {
+    if (button.value == "Start") {
+        aiTurn()
+        button.disabled = true
+    } else if (button.value == "restart") {
+        var htmlBoard
+        var msg
+
+        for (var x = 0; x < 3; x++) {
+            board[x][y] = 0
+            htmlBoard = document.getElementById(String(x) + String(y))
+            htmlBoard.style.color = "#444"
+            htmlBoard.innerHTML = ""
+        }
+    }
+
+    button.value = "Start"
+    msg = document.getElementById
 
 }
