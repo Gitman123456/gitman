@@ -11,7 +11,7 @@ function onLoginButtonClick(event) {
 
     if (id == "lswlsw0510@icloud.com" && password === "felix0510") {
         alert("logged in")
-        window.location.href = "intro.html"
+        window.location.href = "main.html"
     } else{
         alert("login failed")
     }
