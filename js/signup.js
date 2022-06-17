@@ -30,7 +30,7 @@ function onRegisterButtonClick(event) {
         localStorage.setItem(USER_ID_KEY, userID)
         localStorage.setItem(USER_PASSWORD_KEY, userPassword)
         alert("Sign up successfull")
-        window.location.href = "intro.html"
+        window.location.href = "index.html"
     }
 
 registerButton.addEventListener("click", onRegisterButtonClick)
