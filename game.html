@@ -1,15 +1,27 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <link type="text/css" rel="stylesheet" href="css/game.css"/>
-        <title>틱택토게임</title>
-
-        
+        <link type="text/css" rel="stylesheet" href="css/game.css" />
+        <title>웹 프로그래밍 7주차 실습</title>
     </head>
     <body>
-        <header>
-            <p>Tic Tac Toe Game</p>
-        </header>
+        <div class="wrapper row1">
+            <header id="header" class="clear">
+              <div id="hgroup">
+                <h1><a href="index.html">나의 코딩 경험을 소개합니다!</a></h1>
+                <h2>메이킷코드랩 웹 프로그래밍 수업</h2>
+              </div>
+              <nav>
+                <ul>
+                  <li><a href="#">Scratch</a></li>
+                  <li><a href="#">EV3</a></li>
+                  <li><a href="#">Micro-bit</a></li>
+                  <li><a href="#">Python</a></li>
+                  <li class="last"><a href="#">Web</a></li>
+                </ul>
+              </nav>
+            </header>
+          </div>
         <br/>
         <p id="message"></p>
         <br/>
@@ -18,7 +30,7 @@
                 <td id="00" onclick="clickedCell(this)"></td>
                 <td id="01" onclick="clickedCell(this)"></td>
                 <td id="02" onclick="clickedCell(this)"></td>
-            </tr> 
+            </tr>
             <tr>
                 <td id="10" onclick="clickedCell(this)"></td>
                 <td id="11" onclick="clickedCell(this)"></td>
@@ -27,15 +39,13 @@
             <tr>
                 <td id="20" onclick="clickedCell(this)"></td>
                 <td id="21" onclick="clickedCell(this)"></td>
-                <td id="22 "onclick="clickedCell(this)"></td>
-            </tr>   
-    
+                <td id="22" onclick="clickedCell(this)"></td>
+            </tr>
         </table>
         <br><br>
         <input type="button" value="Start" id="btn-restart" onclick="restartBtn(this)"/>
         <br>
-        <footer>
-            <p>Read more on: <a href="https://github.com/Cledersonbc/tic-tac-toe-minimax/blob/master/README.md">Github</a>
-        </footer>
+
+        <script type="text/javascript" src="js/game.js"></script>
     </body>
 </html>
